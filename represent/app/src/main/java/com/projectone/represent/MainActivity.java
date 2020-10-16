@@ -17,14 +17,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MainActivity extends AppCompatActivity {
+    private ArrayList<Office> offices_list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         final EditText textView = (EditText) findViewById(R.id.address_edit_text);
+
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://www.googleapis.com/civicinfo/v2/representatives?key=AIzaSyCa5SOrP4lGuotvRWYW9GPD_ZSn9lYQd-A&address=1263%20Pacific%20Ave.%20Kansas%20City%20KS";
@@ -34,14 +37,26 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.e("REQ", "SUCCESS");
-                        // Display the first 500 characters of the response string.
                         textView.setText("Response is: "+ response.substring(0,500));
                         try {
-                            JSONObject received = new JSONObject(response);
-                            JSONArray offices = received.getJSONArray("offices");
-                            JSONObject office_one = (JSONObject) offices.get(0);
-                            Office office_received = new Office(office_one);
-                            textView.setText(office_received.getLevels()[0]);
+                            JSONObject received_object = new JSONObject(response);
+                            JSONArray received_offices = received_object.getJSONArray("offices");
+                            for(int i = 0; i < received_offices.length(); i++) {
+                                JSONObject received_office_obj = (JSONObject) received_offices.get(i);
+                                Office received_office = new Office(received_office_obj);
+                                offices_list.add(received_office);
+                            }
+
+                            Office office_one = offices_list.get(0);
+                            textView.setText(String.valueOf(office_one.getLevels()[0]));
+
+                            JSONArray received_officials = received_object.getJSONArray("officials");
+                            for(int i = 0; i < received_officials.length(); i++) {
+
+                            }
+
+                            //TODO: Finish setting up Officials
+
                         } catch (JSONException e) {
                             Log.e("REQ", e.getMessage());
                             e.printStackTrace();

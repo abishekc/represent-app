@@ -13,10 +13,15 @@ public class Office {
         this.indices = indices;
     }
 
-    public Office(JSONObject received_office) throws JSONException {
-        this.name = received_office.getString("name");
-        JSONArray pre_levels = received_office.getJSONArray("levels");
+    public Office(JSONObject json_office) throws JSONException {
+        //Name
+        this.name = json_office.getString("name");
+
+        //Levels
+        JSONArray pre_levels = json_office.getJSONArray("levels");
         this.levels = setupLevels(pre_levels);
+
+        //Officials Indices
         this.indices = new int[1];
     }
 
