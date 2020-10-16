@@ -13,6 +13,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -29,13 +33,24 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.e("REQ", "HERE");
+                        Log.e("REQ", "SUCCESS");
                         // Display the first 500 characters of the response string.
                         textView.setText("Response is: "+ response.substring(0,500));
+                        try {
+                            JSONObject received = new JSONObject(response);
+                            JSONArray offices = received.getJSONArray("offices");
+                            JSONObject office_one = (JSONObject) offices.get(0);
+                            Office office_received = new Office(office_one);
+                            textView.setText(office_received.getLevels()[0]);
+                        } catch (JSONException e) {
+                            Log.e("REQ", e.getMessage());
+                            e.printStackTrace();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("REQ", error.getMessage());
                 textView.setText("That didn't work!");
             }
         });
