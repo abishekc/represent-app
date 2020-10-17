@@ -18,7 +18,11 @@ public class Official {
 
     public Official(JSONObject json_official) throws JSONException {
         this.name = json_official.getString("name");
-        this.party = json_official.getString("party");
+        if (json_official.has("party")) {
+            this.party = json_official.getString("party");
+        } else {
+            this.party = "Independent";
+        }
 
         if (json_official.has("photoUrl")) {
             this.photoUrl = json_official.getString("photoUrl");
