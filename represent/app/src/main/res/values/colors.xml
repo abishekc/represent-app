@@ -4,5 +4,10 @@
     <color name="colorPrimaryBright">#FFFFFF</color>
     <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="darkSlateGray">#2f3a40</color>
+    <color name="darkSlateGray">#24262b</color>
+    <color name="lighterSlateGray">#404e56</color>
+    <color name="mediumSlatePurple">#856cff</color>
+    <color name="lightFlatBlue">#a2eaf2</color>
+    <color name="tomato">#ff556e</color>
+    <color name="gold">#fed32d</color>
 </resources>

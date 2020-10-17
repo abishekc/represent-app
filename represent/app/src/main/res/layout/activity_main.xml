@@ -5,7 +5,142 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/darkSlateGray">
+    android:background="@android:color/black">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:fontFamily="@font/nevis"
+        android:letterSpacing="0.2"
+        android:paddingTop="40dp"
+        android:paddingBottom="25dp"
+        android:text="REPRESENT"
+        android:textColor="@color/tomato"
+        android:textSize="22dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/darkSlateGray"
+        app:cardCornerRadius="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/us_rep_text_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/black"
+                android:fontFamily="@font/poppins_bold"
+                android:letterSpacing="0.15"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="U.S. REPRESENTATIVE"
+                android:textColor="@color/gold"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/name_third_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="15dp"
+                android:text="SENATOR"
+                android:textColor="@color/colorPrimaryBright"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/darkSlateGray"
+        app:cardCornerRadius="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/us_rep_text_label2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/black"
+                android:fontFamily="@font/poppins_bold"
+                android:letterSpacing="0.15"
+                android:paddingTop="10dp"
+                android:paddingBottom="5dp"
+                android:text="U.S. SENATORS"
+                android:textColor="@color/gold"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/name_first_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="15dp"
+                android:text="SENATOR"
+                android:textColor="@color/colorPrimaryBright"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/darkSlateGray"
+        app:cardCornerRadius="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        android:layout_marginTop="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name_second_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="15dp"
+                android:text="SENATOR"
+                android:textColor="@color/colorPrimaryBright"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <EditText
         android:id="@+id/address_edit_text"
@@ -14,36 +149,10 @@
         android:ems="10"
         android:fontFamily="@font/nevis"
         android:text="ZipCode"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/name_first_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address_edit_text" />
-
-    <TextView
-        android:id="@+id/name_second_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_first_view" />
-
-    <TextView
-        android:id="@+id/name_third_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_second_view" />
+        app:layout_constraintTop_toBottomOf="@id/cardView3" />
 
     <Button
         android:id="@+id/refresh_button"
@@ -51,23 +160,11 @@
         android:layout_height="wrap_content"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_third_view" />
+        app:layout_constraintTop_toBottomOf="@+id/address_edit_text" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
-        android:paddingLeft="20dp"
-        android:textSize="18dp"
-        android:textColor="@color/colorPrimaryBright"
-        android:fontFamily="@font/nevis"
-        android:text="REPRESENT"
-        android:textAlignment="inherit"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="182dp"
-        android:background="@color/darkSlateGray"
-        android:letterSpacing="0.2"/>
+
+
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>
