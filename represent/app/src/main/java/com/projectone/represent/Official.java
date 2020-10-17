@@ -1,5 +1,11 @@
 package com.projectone.represent;
 
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Official {
     public Official(Office office, String name, String party, String[] phones, String[] urls, String photoUrl) {
         this.office = office;
@@ -10,8 +16,32 @@ public class Official {
         this.photoUrl = photoUrl;
     }
 
-    public Official() {
+    public Official(JSONObject json_official) throws JSONException {
+        this.name = json_official.getString("name");
+        this.party = json_official.getString("party");
 
+        if (json_official.has("photoUrl")) {
+            this.photoUrl = json_official.getString("photoUrl");
+        } else {
+            this.photoUrl = "";
+        }
+
+        this.urls = new String[10];
+        this.office = new Office("hello", new String[10], new int[10]);
+        this.phones = new String[10];
+    }
+
+    private String[] setupLevels(JSONArray pre_levels) {
+        String[] levels = new String[pre_levels.length()];
+        for(int i = 0; i < pre_levels.length(); i++) {
+            try {
+                levels[i] = (String) pre_levels.get(i);
+            } catch (JSONException e) {
+                Log.e("OFFICE", e.getMessage());
+            }
+        }
+
+        return levels;
     }
 
     public Office getOffice() {

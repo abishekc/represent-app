@@ -22,12 +22,25 @@ public class Office {
         this.levels = setupLevels(pre_levels);
 
         //Officials Indices
-        this.indices = new int[1];
+        JSONArray pre_indices = json_office.getJSONArray("officialIndices");
+        this.indices = setupIndices(pre_indices);
+    }
+    private int[] setupIndices(JSONArray pre_indices) {
+        int[] indices = new int[pre_indices.length()];
+        for (int i = 0; i < pre_indices.length(); i++) {
+            try {
+                indices[i] = (int) pre_indices.get(i);
+            } catch (JSONException e) {
+                Log.e("OFFICE", e.getMessage());
+            }
+        }
+
+        return indices;
     }
 
     private String[] setupLevels(JSONArray pre_levels) {
         String[] levels = new String[pre_levels.length()];
-        for(int i = 0; i < pre_levels.length(); i++) {
+        for (int i = 0; i < pre_levels.length(); i++) {
             try {
                 levels[i] = (String) pre_levels.get(i);
             } catch (JSONException e) {
