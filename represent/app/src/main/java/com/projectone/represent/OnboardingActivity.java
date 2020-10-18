@@ -58,9 +58,11 @@ public class OnboardingActivity extends AppCompatActivity {
         intent_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final EditText location_text_view = (EditText) findViewById(R.id.location_text_view);
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.putExtra("FORMATTED_ADDRESS", passedAddress);
+                intent.putExtra("FORMATTED_ADDRESS", location_text_view.getText().toString());
                 startActivity(intent);
+                finish();
             }
         });
     }
