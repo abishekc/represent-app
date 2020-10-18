@@ -74,17 +74,6 @@ public class MainActivity extends AppCompatActivity {
             //The key argument here must match that used in the other activity
         }
 
-        address_text.setSelectAllOnFocus(true);
-
-        address_text.setOnFocusChangeListener(new EditText.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    address_text.selectAll();
-                }
-            }
-        });
-
         address_text.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {

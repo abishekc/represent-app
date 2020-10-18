@@ -268,7 +268,8 @@
             android:textColor="@color/colorPrimaryBright"
             android:textSize="16dp"
             android:layout_weight="5"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone"
+            android:selectAllOnFocus="true"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
