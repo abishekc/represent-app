@@ -4,8 +4,8 @@
     <color name="colorPrimaryBright">#FFFFFF</color>
     <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="darkSlateGray">#24262b</color>
-    <color name="lighterSlateGray">#404e56</color>
+    <color name="darkSlateGray">#20242a</color>
+    <color name="lighterSlateGray">#2b3038</color>
     <color name="mediumSlatePurple">#856cff</color>
     <color name="lightFlatBlue">#a2eaf2</color>
     <color name="tomato">#ff556e</color>
