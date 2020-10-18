@@ -1,13 +1,19 @@
 package com.projectone.represent;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -16,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,6 +33,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<TextView> view_list = new ArrayList<>();
+    private ArrayList<TextView> party_view_list = new ArrayList<>();
+    private ArrayList<ImageView> image_view_list = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         /* -- BEGIN SETUP -- */
         final EditText address_text = (EditText) findViewById(R.id.address_edit_text);
-        final Button refresh_button = (Button) findViewById(R.id.refresh_button);
 
         /*final TextView first_name_view =
         final TextView second_name_view = (TextView) findViewById(R.id.name_second_view);
@@ -43,26 +53,52 @@ public class MainActivity extends AppCompatActivity {
         view_list.add((TextView) findViewById(R.id.name_first_view));
         view_list.add((TextView) findViewById(R.id.name_second_view));
         view_list.add((TextView) findViewById(R.id.name_third_view));
+
+        party_view_list.add((TextView) findViewById(R.id.party_first_view));
+        party_view_list.add((TextView) findViewById(R.id.party_second_view));
+        party_view_list.add((TextView) findViewById(R.id.party_third_view));
+
+        image_view_list.add((ImageView) findViewById(R.id.image_first_view));
+        image_view_list.add((ImageView) findViewById(R.id.image_second_view));
+        image_view_list.add((ImageView) findViewById(R.id.image_third_view));
+
         /* -- END SETUP -- */
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String formatted_address = extras.getString("FORMATTED_ADDRESS");
+            address_text.setText(formatted_address);
             Log.e("PASSED", formatted_address);
             reloadOfficials(formatted_address);
             //String value = extras.getString("key");
             //The key argument here must match that used in the other activity
         }
 
+        address_text.setSelectAllOnFocus(true);
 
-        refresh_button.setOnClickListener(new View.OnClickListener() {
+        address_text.setOnFocusChangeListener(new EditText.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                reloadOfficials(address_text.getText().toString());
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    address_text.selectAll();
+                }
             }
         });
 
+        address_text.setOnEditorActionListener(new EditText.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    reloadOfficials(address_text.getText().toString());
+                    address_text.clearFocus();
+                    InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void reloadOfficials(String address) {
@@ -107,6 +143,23 @@ public class MainActivity extends AppCompatActivity {
                                 for (int j = 0; j < offices_list.get(i).getIndices().length; j++) {
                                     int pos = offices_list.get(i).getIndices()[j];
                                     view_list.get(count).setText(officials_list.get(pos).getName());
+                                    party_view_list.get(count).setText(officials_list.get(pos).getParty());
+                                    if (officials_list.get(pos).getParty().equals("Democrat")) {
+                                        Log.e("COLOR", "here");
+                                        party_view_list.get(count).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.democratBlue));
+                                    } else if (officials_list.get(pos).getParty().equals("Republican")) {
+                                        party_view_list.get(count).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.republicanRed));
+                                    }
+
+
+                                    //ImageView image_third_view = (ImageView) findViewById(R.id.image_third_view);
+                                    if (!officials_list.get(pos).getPhotoUrl().equals("")) {
+                                        /*Picasso.get().load(officials_list.get(pos).getPhotoUrl()).into(image_third_view);
+                                        Log.e("IMAGE", "here");
+                                        Log.e("IMAGE", officials_list.get(pos).getPhotoUrl());*/
+                                        Glide.with(getApplicationContext()).load(officials_list.get(pos).getPhotoUrl()).circleCrop().into(image_view_list.get(count));
+                                    }
+
                                     count++;
                                 }
                             }

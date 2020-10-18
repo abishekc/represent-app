@@ -10,4 +10,6 @@
     <color name="lightFlatBlue">#a2eaf2</color>
     <color name="tomato">#ff556e</color>
     <color name="gold">#fed32d</color>
+    <color name="democratBlue">#408bff</color>
+    <color name="republicanRed">#ff1744</color>
 </resources>

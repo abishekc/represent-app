@@ -19,7 +19,14 @@ public class Official {
     public Official(JSONObject json_official) throws JSONException {
         this.name = json_official.getString("name");
         if (json_official.has("party")) {
-            this.party = json_official.getString("party");
+            String temp_party = json_official.getString("party");
+            if (temp_party.equals("Democratic Party")) {
+                this.party = "Democrat";
+            } else if(temp_party.equals("Republican Party")) {
+                this.party = "Republican";
+            } else {
+                this.party = json_official.getString("party");
+            }
         } else {
             this.party = "Independent";
         }
