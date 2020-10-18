@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         image_view_list.add((ImageView) findViewById(R.id.image_second_view));
         image_view_list.add((ImageView) findViewById(R.id.image_third_view));
 
+        //Button random_button = (Button) findViewById(R.id.random_button);
+
         /* -- END SETUP -- */
 
         Bundle extras = getIntent().getExtras();
