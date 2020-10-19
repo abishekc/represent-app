@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Official {
-    public Official(Office office, String name, String party, String[] phones, String[] urls, String photoUrl) {
+    public Official(Office office, String name, String party, String[] phones, String urls, String photoUrl) {
         this.office = office;
         this.name = name;
         this.party = party;
@@ -37,7 +37,11 @@ public class Official {
             this.photoUrl = "";
         }
 
-        this.urls = new String[10];
+        if (json_official.has("urls")) {
+            this.urls = setupUrls(json_official.getJSONArray("urls"));
+        } else {
+            this.urls = "https://www.google.com";
+        }
         this.office = new Office("hello", new String[10], new int[10]);
         this.phones = new String[10];
     }
@@ -53,6 +57,19 @@ public class Official {
         }
 
         return levels;
+    }
+
+    private String setupUrls(JSONArray pre_urls) {
+            String[] urls = new String[pre_urls.length()];
+            for (int i = 0; i < pre_urls.length(); i++) {
+                try {
+                    urls[i] = (String) pre_urls.get(i);
+                } catch (JSONException e) {
+                    Log.e("OFFICE", e.getMessage());
+                }
+            }
+
+        return urls[0];
     }
 
     public Office getOffice() {
@@ -87,11 +104,11 @@ public class Official {
         this.phones = phones;
     }
 
-    public String[] getUrls() {
+    public String getUrls() {
         return urls;
     }
 
-    public void setUrls(String[] urls) {
+    public void setUrls(String urls) {
         this.urls = urls;
     }
 
@@ -107,6 +124,6 @@ public class Official {
     private String name;
     private String party;
     private String phones[];
-    private String urls[];
+    private String urls;
     private String photoUrl;
 }

@@ -3,7 +3,11 @@ package com.projectone.represent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -30,11 +34,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<TextView> view_list = new ArrayList<>();
     private ArrayList<TextView> party_view_list = new ArrayList<>();
     private ArrayList<ImageView> image_view_list = new ArrayList<>();
+    private ArrayList<ImageView> link_view_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +68,67 @@ public class MainActivity extends AppCompatActivity {
         image_view_list.add((ImageView) findViewById(R.id.image_second_view));
         image_view_list.add((ImageView) findViewById(R.id.image_third_view));
 
-        //Button random_button = (Button) findViewById(R.id.random_button);
+        link_view_list.add((ImageView) findViewById(R.id.link_view_one));
+        link_view_list.add((ImageView) findViewById(R.id.link_view_two));
+        link_view_list.add((ImageView) findViewById(R.id.link_view_three));
+
+        TextView random_button = (TextView) findViewById(R.id.randomize_button);
 
         /* -- END SETUP -- */
+
+        random_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /* BOUNDING BOXES FOR LAT LONG*/
+                double min_lat = 34.963066;
+                double max_lat = 48.636997;
+                double min_long = -119.076595;
+                double max_long = -93.017026;
+
+
+                /*41.084014, -89.896909
+                41.232919, -81.767034
+                31.415212, -89.984807*/
+
+                Random r = new Random();
+                double random_lat = min_lat + (max_lat - min_lat) * r.nextDouble();
+                double random_long = min_long + (max_long - min_long) * r.nextDouble();
+
+                Log.e("LAT", String.valueOf(random_lat));
+                Log.e("LONG", String.valueOf(random_long));
+                String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + String.valueOf(random_lat) + "," + String.valueOf(random_long) + "&key=AIzaSyCa5SOrP4lGuotvRWYW9GPD_ZSn9lYQd-A";
+
+                final RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.e("REQ", "SUCCESS");
+                                //textView.setText("Response is: "+ response.substring(0,500));
+                                try {
+                                    JSONObject received_object = new JSONObject(response);
+                                    JSONArray received_results = received_object.getJSONArray("results");
+                                    JSONObject received_address = (JSONObject) received_results.get(0);
+                                    String formatted_address = received_address.getString("formatted_address");
+                                    Log.e("LOC", formatted_address);
+                                    address_text.setText(formatted_address);
+                                    reloadOfficials(address_text.getText().toString());
+                                } catch (JSONException e) {
+                                    Log.e("LOC_E", e.getMessage());
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //Log.e("REQ", error.getLocalizedMessage());
+                        //textView.setText("That didn't work!");
+                    }
+                });
+
+                queue.add(stringRequest);
+            }
+        });
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -90,6 +154,21 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void openBrowser(View view){
+
+        //Get url from tag
+        String url = (String) view.getTag();
+
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+
+        //pass the url to intent data
+        intent.setData(Uri.parse(url));
+
+        startActivity(intent);
     }
 
     private void reloadOfficials(String address) {
@@ -149,7 +228,11 @@ public class MainActivity extends AppCompatActivity {
                                         Log.e("IMAGE", "here");
                                         Log.e("IMAGE", officials_list.get(pos).getPhotoUrl());*/
                                         Glide.with(getApplicationContext()).load(officials_list.get(pos).getPhotoUrl()).circleCrop().into(image_view_list.get(count));
+                                    } else {
+                                        image_view_list.get(count).setImageResource(R.drawable.baseline_account_circle_white_36dp);
                                     }
+
+                                    link_view_list.get(count).setTag(officials_list.get(pos).getUrls());
 
                                     count++;
                                 }

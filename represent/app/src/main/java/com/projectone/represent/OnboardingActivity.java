@@ -96,6 +96,8 @@ public class OnboardingActivity extends AppCompatActivity {
                             String formatted_address = received_address.getString("formatted_address");
                             Log.e("LOC", formatted_address);
                             location_text_view.setText(formatted_address);
+
+
                             int colorFrom = getResources().getColor(R.color.blueGray);
                             int colorTo = getResources().getColor(R.color.gold);
                             ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);

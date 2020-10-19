@@ -136,6 +136,25 @@
                 android:textColor="@color/colorPrimaryBright"/>
         </LinearLayout>-->
 
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/randomize_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Randomize"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/lightFlatBlue"
+                android:background="@drawable/bg_rounded">
+            </TextView>
+        </LinearLayout>
+
     </LinearLayout>
 
     <!--<View
@@ -192,7 +211,7 @@
                     app:srcCompat="@drawable/baseline_account_circle_white_36dp" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:paddingLeft="10dp">
@@ -215,6 +234,14 @@
                         android:textSize="16dp" />
 
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/link_view_three"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:onClick="openBrowser">
+
+                </ImageView>
 
             </LinearLayout>
 
@@ -269,8 +296,8 @@
                     android:scaleType="centerCrop"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingLeft="10dp">
 
@@ -292,6 +319,14 @@
                         android:textColor="@color/colorPrimaryBright"/>
 
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/link_view_one"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:onClick="openBrowser">
+
+                </ImageView>
 
             </LinearLayout>
 
@@ -331,8 +366,8 @@
                     android:scaleType="centerCrop"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingLeft="10dp">
 
@@ -354,6 +389,14 @@
                         android:textColor="@color/colorPrimaryBright"/>
 
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/link_view_two"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:onClick="openBrowser">
+
+                </ImageView>
 
             </LinearLayout>
 
