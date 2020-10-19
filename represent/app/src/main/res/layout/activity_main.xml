@@ -211,7 +211,7 @@
                     app:srcCompat="@drawable/baseline_account_circle_white_36dp" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:paddingLeft="10dp">
@@ -237,8 +237,10 @@
 
                 <ImageView
                     android:id="@+id/link_view_three"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="12.5dp"
+                    android:background="@drawable/baseline_link_white_48dp"
                     android:onClick="openBrowser">
 
                 </ImageView>
@@ -296,7 +298,7 @@
                     android:scaleType="centerCrop"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingLeft="10dp">
@@ -322,8 +324,10 @@
 
                 <ImageView
                     android:id="@+id/link_view_one"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="12.5dp"
+                    android:background="@drawable/baseline_link_white_48dp"
                     android:onClick="openBrowser">
 
                 </ImageView>
@@ -366,7 +370,7 @@
                     android:scaleType="centerCrop"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:paddingLeft="10dp">
@@ -392,8 +396,10 @@
 
                 <ImageView
                     android:id="@+id/link_view_two"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="12.5dp"
+                    android:background="@drawable/baseline_link_white_48dp"
                     android:onClick="openBrowser">
 
                 </ImageView>
