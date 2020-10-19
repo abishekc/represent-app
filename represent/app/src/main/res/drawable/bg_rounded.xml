@@ -6,7 +6,7 @@
     <item android:bottom="0px">
 
         <shape  android:shape="rectangle">
-            <solid android:color="@color/darkSlateGray" />
+            <solid android:color="#1a172e" android:id="@+id/bg_round"/>
             <corners android:radius="3.5dp" />
         </shape>
 

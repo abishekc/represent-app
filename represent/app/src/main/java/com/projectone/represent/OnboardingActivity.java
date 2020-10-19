@@ -5,16 +5,24 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.shapes.Shape;
 import android.location.Geocoder;
 import android.location.Location;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -43,7 +51,7 @@ public class OnboardingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_onboarding);
 
         Button location_button = (Button) findViewById(R.id.location_button);
-        Button intent_button = (Button) findViewById(R.id.intent_button);
+        ImageView intent_button = (ImageView) findViewById(R.id.intent_button);
 
 
         location_button.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +78,9 @@ public class OnboardingActivity extends AppCompatActivity {
     public void updateAddress(double latitude, double longitude) {
         final RequestQueue queue = Volley.newRequestQueue(this);
         final EditText location_text_view = (EditText) findViewById(R.id.location_text_view);
+        final ImageView check_mark_image = (ImageView) findViewById(R.id.check_mark_image);
+        final LinearLayout location_linear = (LinearLayout) findViewById(R.id.location_linear);
+        final View bg_rounded = (View) findViewById(R.id.bg_round);
         String url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + String.valueOf(latitude) + "," + String.valueOf(longitude) + "&key=AIzaSyCa5SOrP4lGuotvRWYW9GPD_ZSn9lYQd-A";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -85,6 +96,29 @@ public class OnboardingActivity extends AppCompatActivity {
                             String formatted_address = received_address.getString("formatted_address");
                             Log.e("LOC", formatted_address);
                             location_text_view.setText(formatted_address);
+                            int colorFrom = getResources().getColor(R.color.blueGray);
+                            int colorTo = getResources().getColor(R.color.gold);
+                            ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+                            ValueAnimator textColorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorTo, colorFrom);
+                            colorAnimation.setDuration(800); // milliseconds
+                            ValueAnimator.AnimatorUpdateListener listener = new ValueAnimator.AnimatorUpdateListener() {
+                                @Override
+                                public void onAnimationUpdate(ValueAnimator animation) {
+                                    location_linear.setBackgroundColor((int) animation.getAnimatedValue());
+                                }
+                            };
+
+                            ValueAnimator.AnimatorUpdateListener listener_two = new ValueAnimator.AnimatorUpdateListener() {
+                                @Override
+                                public void onAnimationUpdate(ValueAnimator animation) {
+                                    location_text_view.setTextColor((int) animation.getAnimatedValue());
+                                }
+                            };
+                            colorAnimation.addUpdateListener(listener);
+                            textColorAnimation.addUpdateListener(listener_two);
+                            colorAnimation.start();
+                            textColorAnimation.start();
+                            check_mark_image.setVisibility(ImageView.VISIBLE);
                             passedAddress = formatted_address;
                         } catch (JSONException e) {
                             Log.e("LOC_E", e.getMessage());

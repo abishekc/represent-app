@@ -5,24 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OnboardingActivity"
-    android:background="@color/darkSlateGray">
+    android:background="@android:color/black">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        android:background="@color/colorPrimaryDark"
-        android:paddingTop="200dp">
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        tools:layout_editor_absoluteX="1dp">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:color/black"
             android:fontFamily="@font/poppins_bold"
             android:letterSpacing="0.15"
             android:paddingLeft="2dp"
@@ -36,10 +37,8 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:color/black"
             android:fontFamily="@font/nevis"
             android:letterSpacing="0.2"
-            android:paddingBottom="30dp"
             android:text="REPRESENT"
             android:textColor="@color/tomato"
             android:textSize="28dp" />
@@ -66,65 +65,102 @@
         android:id="@+id/location_button"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/bg_rounded"
-        android:fontFamily="@font/poppins_med"
-        android:letterSpacing="0.2"
+        android:fontFamily="@font/poppins_bold"
+        android:textAllCaps="false"
         android:paddingLeft="30dp"
-        android:paddingTop="15dp"
+        android:paddingTop="17dp"
         android:paddingRight="30dp"
         android:paddingBottom="15dp"
-        android:text="ALLOW LOCATION"
+        android:text="Allow Location"
         android:textColor="@color/lightFlatBlue"
+        app:layout_constraintBottom_toTopOf="@+id/location_linear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/intent_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="NextActivity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_text_view" />
-
-    <EditText
-        android:id="@+id/location_text_view"
+    <LinearLayout
+        android:id="@+id/location_linear"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bg_rounded"
-        android:fontFamily="@font/poppins_reg"
-        android:paddingLeft="25dp"
-        android:paddingTop="15dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="11dp"
-        android:text="OR ENTER YOUR ADDRESS"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryBright"
-        android:textSize="16dp"
+        android:orientation="horizontal"
+        android:paddingRight="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_button" />
+        android:background="@drawable/bg_rounded"
+        android:layout_marginBottom="80dp">
+
+        <EditText
+            android:id="@+id/location_text_view"
+            android:background="@android:color/transparent"
+            android:layout_width="315dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:imeOptions="actionDone"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:paddingLeft="25dp"
+            android:paddingTop="15dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="12.5dp"
+            android:hint="   or enter your address here"
+            android:textColorHint="@color/gold"
+            android:textAlignment="center"
+            android:textColor="@color/gold"
+            android:selectAllOnFocus="true"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/check_mark_image"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="13.1dp"
+            android:background="@drawable/baseline_location_on_black_36dp"
+            android:visibility="invisible">
+
+        </ImageView>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/intent_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/baseline_keyboard_backspace_black_48dp_upd"
+        android:scaleX="-1"
+        android:translationZ="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/location_linear" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/poppins_reg"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorPrimaryBright"
+        android:fontFamily="@font/poppins_med"
         android:paddingLeft="20dp"
         android:paddingTop="15dp"
-        android:paddingBottom="15dp"
         android:paddingRight="20dp"
-        android:layout_marginTop="25dp"
+        android:paddingBottom="15dp"
         android:text="We need your location in order to deliver the most relevant results for your area."
         android:textColor="@color/darkSlateGray"
-        android:background="@color/colorPrimaryBright"
         android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/location_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spacer" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/spacer"
+        app:srcCompat="@drawable/kamala"
+        tools:layout_editor_absoluteX="0dp"
+        android:translationZ="-20dp"
+        android:alpha="0.4"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
