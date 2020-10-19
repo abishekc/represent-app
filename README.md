@@ -12,4 +12,8 @@ https://www.youtube.com/watch?v=qV0K9FfUd4A
 
 ## Screenshots
 
-![Alt text](./screenshots/scrn1.jpg?raw=true "Optional Title")
+![Alt text](./screenshots/scrn1.jpg?raw=true "Onboarding Screen")
+![Alt text](./screenshots/scrn2.jpg?raw=true "Onboarding Screen")
+![Alt text](./screenshots/scrn3.jpg?raw=true "Onboarding Screen")
+
+<img src="./screenshots/scrn1.jpg" alt="Your image title" width="250"/>
